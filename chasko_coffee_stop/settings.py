@@ -65,6 +65,11 @@ DATABASES = {
     )
 }
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://chaskocoffeestopbackend-production.up.railway.app',
+    'https://chasko-coffee-stop.vercel.app',
+]
+
 CORS_ALLOWED_ORIGINS = [
     "https://chasko-coffee-stop.vercel.app"
 ]
