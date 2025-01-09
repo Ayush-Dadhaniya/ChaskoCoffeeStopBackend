@@ -1,19 +1,15 @@
-# Use an official Python runtime as a parent image
 FROM python:3.10
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-# Set work directory
-WORKDIR /code
-
 # Install dependencies
+WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 
-# Copy project
+# Copy project files into container
 COPY . /code/
 
-# Use Gunicorn to run the application
-CMD ["gunicorn", "chasko_coffee_stop.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Expose port for the container
+EXPOSE 8000
+
+# Set the entry point to uWSGI
+CMD ["uwsgi", "--http", "0.0.0.0:8000", "--module", "chasko_coffee_stop.wsgi:application", "--master", "--processes", "4", "--threads", "2"]
