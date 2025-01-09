@@ -11,7 +11,7 @@ SECRET_KEY = 'django-insecure-w!zzw2+j6i_le_e0^sb+=0+k1gkpq-@c=h0rij78b@udpq9%91
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0','chasko-coffee-stop.vercel.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0','chasko-coffee-stop.vercel.app','chaskocoffeestopbackend-production.up.railway.app']
 CORS_ORIGIN_ALLOW_ALL = True
 
 INSTALLED_APPS = [
