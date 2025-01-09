@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: chasko_coffee_stop
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://admin:admin@db:5432/chasko_coffee_stop
+
+  backup:
+    image: schickling/postgres-backup-s3:latest
+    depends_on:
+      - db
+    environment:
+      - SCHEDULE=@daily
+      - S3_REGION=your-s3-region
+      - S3_ACCESS_KEY_ID=your-s3-access-key
+      - S3_SECRET_ACCESS_KEY=your-s3-secret-key
+      - S3_BUCKET=your-s3-bucket
+      - S3_PREFIX=backup
+      - POSTGRES_DATABASE=chasko_coffee_stop
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_HOST=db
+
+volumes:
+  postgres_data:
