@@ -14,3 +14,6 @@ RUN pip install -r requirements.txt
 
 # Copy project
 COPY . /code/
+
+# Use Gunicorn to run the application
+CMD ["gunicorn", "chasko_coffee_stop.wsgi:application", "--bind", "0.0.0.0:8000"]
