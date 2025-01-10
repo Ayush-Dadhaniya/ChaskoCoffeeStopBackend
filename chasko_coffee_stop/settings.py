@@ -11,9 +11,11 @@ SECRET_KEY = 'django-insecure-w!zzw2+j6i_le_e0^sb+=0+k1gkpq-@c=h0rij78b@udpq9%91
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0','chasko-coffee-stop.vercel.app','chaskocoffeestopbackend-production.up.railway.app']
-CORS_ORIGIN_ALLOW_ALL = True
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0','chasko-coffee-stop.vercel.app','chaskocoffeestopbackend-production.up.railway.app','*']
+CORS_ALLOWED_ORIGINS = [
+    "https://chasko-coffee-stop.vercel.app",
+    "https://chaskocoffeestopbackend-production.up.railway.app",
+]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -60,7 +62,7 @@ WSGI_APPLICATION = 'chasko_coffee_stop.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://admin:admin@postgres-production-9e7e.up.railway.app:5432/chasko_coffee_stop',
+        default=os.getenv('DATABASE_URL'),
         conn_max_age=600
     )
 }
@@ -73,7 +75,8 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://chasko-coffee-stop.vercel.app"
+        'https://chaskocoffeestopbackend-production.up.railway.app',
+    'https://chasko-coffee-stop.vercel.app',
 ]
 
 

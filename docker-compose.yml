@@ -1,5 +1,5 @@
 services:
-  postgres-production-9e7e.up.railway.app:
+  postgres:
     image: postgres:13
     environment:
       POSTGRES_DB: chasko_coffee_stop
@@ -8,22 +8,27 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  web:
-    build: .
-    command: uwsgi --http 0.0.0.0:8000 --module chasko_coffee_stop.wsgi:application
-    volumes:
-      - .:/code
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgres://admin:admin@postgres-production-9e7e.up.railway.app:5432/chasko_coffee_stop
+    web:
+      build: .
+      command: uwsgi --http 0.0.0.0:8000 --module chasko_coffee_stop.wsgi:application
+      volumes:
+        - .:/code
+      ports:
+        - "8000:8000"
+      depends_on:
+        - postgres
+      environment:
+        - DATABASE_URL=postgres://admin:admin@viaduct.proxy.rlwy.net:32239/chasko_coffee_stop
+        - PGHOST=viaduct.proxy.rlwy.net
+        - PGPORT=32239
+        - PGUSER=admin
+        - PGPASSWORD=admin
+        - PGDATABASE=chasko_coffee_stop
 
   backup:
     image: schickling/postgres-backup-s3:latest
     depends_on:
-      - db
+      - postgres
     environment:
       - SCHEDULE=@daily
       - S3_REGION=your-s3-region
@@ -34,7 +39,8 @@ services:
       - POSTGRES_DATABASE=chasko_coffee_stop
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_HOST=postgres-production-9e7e.up.railway.app
+      - POSTGRES_HOST=viaduct.proxy.rlwy.net
+      - POSTGRES_PORT=32239
 
 volumes:
   postgres_data:
