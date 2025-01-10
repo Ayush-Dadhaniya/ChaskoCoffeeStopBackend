@@ -60,10 +60,11 @@ WSGI_APPLICATION = 'chasko_coffee_stop.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://admin:admin@chaskocoffeestopbackend.railway.internal:5432/chasko_coffee_stop',
+        default='postgres://admin:admin@postgres-production-9e7e.up.railway.app:5432/chasko_coffee_stop',
         conn_max_age=600
     )
 }
+
 
 
 CSRF_TRUSTED_ORIGINS = [

@@ -1,5 +1,5 @@
 services:
-  chaskocoffeestopbackend.railway.internal:
+  postgres-production-9e7e.up.railway.app:
     image: postgres:13
     environment:
       POSTGRES_DB: chasko_coffee_stop
@@ -18,7 +18,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgres://admin:admin@chaskocoffeestopbackend.railway.internal:5432/chasko_coffee_stop
+      - DATABASE_URL=postgres://admin:admin@postgres-production-9e7e.up.railway.app:5432/chasko_coffee_stop
 
   backup:
     image: schickling/postgres-backup-s3:latest
@@ -34,7 +34,7 @@ services:
       - POSTGRES_DATABASE=chasko_coffee_stop
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_HOST=chaskocoffeestopbackend.railway.internal
+      - POSTGRES_HOST=postgres-production-9e7e.up.railway.app
 
 volumes:
   postgres_data:
