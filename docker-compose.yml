@@ -7,20 +7,20 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@viaduct.proxy.rlwy.net:32239/$POSTGRES_DB
+      - DATABASE_URL=postgres://admin:admin@viaduct.proxy.rlwy.net:32239/chasko_coffee_stop
     depends_on:
       - postgres
 
   postgres:
     image: postgres:13
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-chasko_coffee_stop}
-      POSTGRES_USER: ${POSTGRES_USER:-admin}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+      POSTGRES_DB: chasko_coffee_stop
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "32239:32239"
 
 volumes:
   postgres_data:
