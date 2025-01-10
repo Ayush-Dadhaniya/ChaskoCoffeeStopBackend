@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-import dj_database_url
+from urllib.parse import urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -60,20 +60,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chasko_coffee_stop.wsgi.application'
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=os.getenv('DATABASE_URL', 'postgres://admin:admin@viaduct.proxy.rlwy.net:32239/chasko_coffee_stop'),
-#         conn_max_age=600
-#     )
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'chasko_coffee_stop',
         'USER': 'admin',
         'PASSWORD': 'admin',
-        'HOST': 'viaduct.proxy.rlwy.net',  # e.g., 'localhost' or your Railway hostname
-        'PORT': '32239',  # Default PostgreSQL port
+        'HOST': 'viaduct.proxy.rlwy.net',
+        'PORT': '32239',
     }
 }
 
