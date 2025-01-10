@@ -1,5 +1,5 @@
 services:
-  db:
+  chaskocoffeestopbackend.railway.internal:
     image: postgres:13
     environment:
       POSTGRES_DB: chasko_coffee_stop
