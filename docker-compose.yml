@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@viaduct.proxy.rlwy.net:32239/$POSTGRES_DB
     depends_on:
       - postgres
 
