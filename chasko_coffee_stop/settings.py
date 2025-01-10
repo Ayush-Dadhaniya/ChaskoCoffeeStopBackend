@@ -60,13 +60,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chasko_coffee_stop.wsgi.application'
 
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.getenv('DATABASE_URL', 'postgres://admin:admin@viaduct.proxy.rlwy.net:32239/chasko_coffee_stop'),
+#         conn_max_age=600
+#     )
+# }
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'chasko_coffee_stop',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': 'viaduct.proxy.rlwy.net',  # e.g., 'localhost' or your Railway hostname
+        'PORT': '32239',  # Default PostgreSQL port
+    }
 }
-
 
 
 CSRF_TRUSTED_ORIGINS = [
