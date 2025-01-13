@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from urllib.parse import urlparse
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,7 +14,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0','chasko-coffee-stop.vercel.app','chaskocoffeestopbackend-production.up.railway.app','*']
 CORS_ALLOWED_ORIGINS = [
     "https://chasko-coffee-stop.vercel.app",
-    "https://chaskocoffeestopbackend-production.up.railway.app",
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -30,6 +29,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -61,24 +62,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'chasko_coffee_stop.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'chasko_coffee_stop',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '32239',
-    }
+    'default': dj_database_url.config(default='postgres://admin:admin@db:5432/chasko_coffee_stop')
 }
-
-
 CSRF_TRUSTED_ORIGINS = [
-    'https://chaskocoffeestopbackend-production.up.railway.app',
     'https://chasko-coffee-stop.vercel.app',
 ]
 
 CORS_ALLOWED_ORIGINS = [
-        'https://chaskocoffeestopbackend-production.up.railway.app',
     'https://chasko-coffee-stop.vercel.app',
 ]
 
@@ -104,7 +94,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 MEDIA_URL = '/media/'

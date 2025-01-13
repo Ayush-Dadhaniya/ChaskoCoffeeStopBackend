@@ -17,7 +17,7 @@ RUN apt-get update \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the project files into the container
+# Copy the project files into the container 
 COPY . .
 
 # Expose the application port
