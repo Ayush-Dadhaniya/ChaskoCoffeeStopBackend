@@ -1,27 +1,23 @@
-# Use Python slim image as the base
 FROM python:3.10-slim
 
-# Set environment variables to prevent Python from writing bytecode and buffering stdout
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Install system dependencies
+RUN apt-get update && apt-get install -y gcc python3-dev musl-dev libpq-dev
+
+# Install uwsgi
+RUN pip install uwsgi
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update \
-    && apt-get install -y gcc python3-dev musl-dev libpq-dev \
-    && apt-get clean
-
-# Install Python dependencies
-COPY requirements.txt .
+# Install required Python packages
+COPY requirements.txt . 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the project files into the container 
+# Copy the application code into the container
 COPY . .
 
 # Expose the application port
 EXPOSE 8000
 
-# Command to run the application
-CMD ["uwsgi", "--http", "0.0.0.0:8000", "--module", "chasko_coffee_stop.wsgi:application"]
+# Command to run the app using uWSGI
+CMD ["uwsgi", "--http", ":8000", "--wsgi-file", "wsgi.py", "--master", "--processes", "4", "--threads", "2"]

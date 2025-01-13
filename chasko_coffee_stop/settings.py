@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
-import dj_database_url
+# import dj_database_url
+from urllib.parse import urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -62,10 +63,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chasko_coffee_stop.wsgi.application'
 
-# Use environment variables for sensitive data
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgres://admin:admin@postgres:5432/chasko_coffee_stop')
+
+url = urlparse(DATABASE_URL)
+
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL', 'postgres://admin:admin@db:5432/chasko_coffee_stop'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': url.path[1:],
+        'USER': url.username,
+        'PASSWORD': url.password,
+        'HOST': 'postgres',
+        'PORT': url.port,
+    }
 }
+
 
 CSRF_TRUSTED_ORIGINS = [
     'https://chasko-coffee-stop.vercel.app',
