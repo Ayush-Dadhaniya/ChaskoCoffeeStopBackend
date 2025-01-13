@@ -1,1 +1,0 @@
-web: gunicorn chasko_coffee_stop.wsgi:application --bind 0.0.0.0:$PORT
