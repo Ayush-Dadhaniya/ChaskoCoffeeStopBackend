@@ -1,10 +1,15 @@
 {
   "version": 2,
   "builds": [
-    { "src": "manage.py", "use": "@vercel/python" }
+    {
+      "src": "chasko_coffee_stop/wsgi.py",
+      "use": "@vercel/python"
+    }
   ],
   "routes": [
-    { "src": "/static/(.*)", "dest": "/static/$1" },
-    { "src": "/(.*)", "dest": "manage.py" }
+    {
+      "src": "/(.*)",
+      "dest": "chasko_coffee_stop/wsgi.py"
+    }
   ]
 }
