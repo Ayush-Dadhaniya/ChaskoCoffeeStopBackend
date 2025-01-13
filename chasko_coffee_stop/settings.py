@@ -12,9 +12,10 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-w!zzw2+j6i_le_e0^sb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'chasko-coffee-stop.vercel.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'chasko-coffee-stop.vercel.app','https://chasko-coffee-stop-backend.vercel.app']
 CORS_ALLOWED_ORIGINS = [
     "https://chasko-coffee-stop.vercel.app",
+    "https://chasko-coffee-stop-backend.vercel.app"
 ]
 
 INSTALLED_APPS = [
@@ -81,6 +82,7 @@ DATABASES = {
 
 CSRF_TRUSTED_ORIGINS = [
     'https://chasko-coffee-stop.vercel.app',
+    "https://chasko-coffee-stop-backend.vercel.app/"
 ]
 
 # Password validation
