@@ -75,14 +75,11 @@ WSGI_APPLICATION = 'chasko_coffee_stop.wsgi.application'
 # Database Configuration
 DATABASE_URL = os.getenv(
     'DATABASE_URL',
-    'postgresql://postgres:PcC1zCfNUyznmaUn@db.pygaenyeyjuelcntrgkh.supabase.co:5432/postgres'
-)
-
-DATABASE_URL = os.getenv(
-    'DATABASE_URL',
     'postgresql://postgres.pygaenyeyjuelcntrgkh:PcC1zCfNUyznmaUn@aws-0-us-east-1.pooler.supabase.com:5432/postgres?sslmode=require'
 )
-
+DATABASES = {
+    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
+}
 
 CSRF_TRUSTED_ORIGINS = [
     'https://chasko-coffee-stop.vercel.app',
