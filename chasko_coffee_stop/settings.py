@@ -64,7 +64,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chasko_coffee_stop.wsgi.application'
 
-DATABASE_URL='postgresql://postgres:PcC1zCfNUyznmaUn@db.pygaenyeyjuelcntrgkh.supabase.co:5432/postgres'
+DATABASE_URL='postgresql://postgres:PcC1zCfNUyznmaUn@db.pygaenyeyjuelcntrgkh.supabase.co:6543/postgres'
 
 url = urlparse(DATABASE_URL)
 
@@ -75,7 +75,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'PcC1zCfNUyznmaUn',
         'HOST': 'db.pygaenyeyjuelcntrgkh.supabase.co',
-        'PORT': '5432',  # or '6543' if required
+        'PORT': '6543',  # or '6543' if required
         'OPTIONS': {
             'sslmode': 'require',
         },

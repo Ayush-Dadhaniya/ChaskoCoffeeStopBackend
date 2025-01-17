@@ -8,7 +8,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://postgres:PcC1zCfNUyznmaUn@db.pygaenyeyjuelcntrgkh.supabase.co:5432/postgres
+      - DATABASE_URL=postgresql://postgres:PcC1zCfNUyznmaUn@db.pygaenyeyjuelcntrgkh.supabase.co:6543/postgres
       - DJANGO_SETTINGS_MODULE=chasko_coffee_stop.settings
     depends_on:
       - postgres
@@ -22,7 +22,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - "6543:5432"
 
 volumes:
   postgres_data:
