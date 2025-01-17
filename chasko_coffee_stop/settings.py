@@ -64,21 +64,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chasko_coffee_stop.wsgi.application'
 
-DATABASE_URL = os.getenv('DATABASE_URL', 'postgres://admin:admin@postgres:5432/chasko_coffee_stop')
+DATABASE_URL='postgresql://postgres:admin@db.pygaenyeyjuelcntrgkh.supabase.co:5432/postgres'
 
 url = urlparse(DATABASE_URL)
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': url.path[1:],
-        'USER': url.username,
-        'PASSWORD': url.password,
-        'HOST': 'postgres',
-        'PORT': url.port,
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'PcC1zCfNUyznmaUn',
+        'HOST': 'db.pygaenyeyjuelcntrgkh.supabase.co',
+        'PORT': '5432',  # or '6543' if required
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
-
 
 CSRF_TRUSTED_ORIGINS = [
     'https://chasko-coffee-stop.vercel.app',

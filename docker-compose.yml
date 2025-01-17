@@ -8,7 +8,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgres://admin:admin@postgres:5432/chasko_coffee_stop  # Use 'postgres' instead of the full container name
+      - DATABASE_URL=postgresql://postgres:PcC1zCfNUyznmaUn@db.pygaenyeyjuelcntrgkh.supabase.co:5432/postgres
       - DJANGO_SETTINGS_MODULE=chasko_coffee_stop.settings
     depends_on:
       - postgres
@@ -16,9 +16,9 @@ services:
   postgres:
     image: postgres:13
     environment:
-      POSTGRES_DB: chasko_coffee_stop
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: PcC1zCfNUyznmaUn
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
