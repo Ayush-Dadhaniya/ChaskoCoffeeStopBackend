@@ -9,11 +9,10 @@ class Subscription(models.Model):
         return self.email
     
 class MenuItem(models.Model):
-    name=models.CharField(max_length=100)
-    description=models.TextField()
-    price=models.DecimalField(max_digits=5,decimal_places=2)
-    image=models.FileField(upload_to='menu_items/',blank=True,null=True)
-    
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.URLField(default='NULL')
     def __str__(self):
         return self.name
 

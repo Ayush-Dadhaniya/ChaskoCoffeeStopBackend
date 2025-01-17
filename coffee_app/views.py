@@ -80,9 +80,14 @@ class MenuItemList(generics.ListCreateAPIView):
     parser_classes = (MultiPartParser, FormParser)
 
     def perform_create(self, serializer):
-        # Handle image field properly
-        image = self.request.data.get('image', None)
-        serializer.save(image=image)
+        # Handle image URL from Supabase or other sources
+        image = self.request.data.get('image', None)  # 'image_url' is the field you pass from frontend
+        if image:
+            serializer.save(image=image)  # Save the URL in the database
+        else:
+            # If no image URL is passed, handle it as needed (optional)
+            serializer.save()
+
 
 class ReviewList(generics.ListCreateAPIView):
     queryset = Review.objects.all()
