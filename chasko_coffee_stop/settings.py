@@ -64,7 +64,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chasko_coffee_stop.wsgi.application'
 
-DATABASE_URL='postgresql://postgres:admin@db.pygaenyeyjuelcntrgkh.supabase.co:5432/postgres'
+DATABASE_URL='postgresql://postgres:PcC1zCfNUyznmaUn@db.pygaenyeyjuelcntrgkh.supabase.co:5432/postgres'
 
 url = urlparse(DATABASE_URL)
 
