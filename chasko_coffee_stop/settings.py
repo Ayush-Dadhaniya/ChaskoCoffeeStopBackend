@@ -1,7 +1,7 @@
 from pathlib import Path
 import os
-# import dj_database_url
 from urllib.parse import urlparse
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,10 +12,19 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-w!zzw2+j6i_le_e0^sb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1','*' ,'0.0.0.0', 'chasko-coffee-stop.vercel.app','chasko-coffee-stop-backend-df1uyvok4-ayush-dadhaniyas-projects.vercel.app','chasko-coffee-stop-backend-git-master-ayush-dadhaniyas-projects.vercel.app']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0',
+    'chasko-coffee-stop.vercel.app',
+    'chasko-coffee-stop-backend-df1uyvok4-ayush-dadhaniyas-projects.vercel.app',
+    'chasko-coffee-stop-backend-git-master-ayush-dadhaniyas-projects.vercel.app',
+    '*'
+]
+
 CORS_ALLOWED_ORIGINS = [
     "https://chasko-coffee-stop.vercel.app",
-    "https://chasko-coffee-stop-backend-git-master-ayush-dadhaniyas-projects.vercel.app"
+    "https://chasko-coffee-stop-backend-git-master-ayush-dadhaniyas-projects.vercel.app",
 ]
 
 INSTALLED_APPS = [
@@ -35,10 +44,9 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -64,27 +72,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chasko_coffee_stop.wsgi.application'
 
-DATABASE_URL='postgresql://postgres:PcC1zCfNUyznmaUn@db.pygaenyeyjuelcntrgkh.supabase.co:6543/postgres'
+# Database Configuration
+DATABASE_URL = os.getenv(
+    'DATABASE_URL',
+    'postgresql://postgres:PcC1zCfNUyznmaUn@db.pygaenyeyjuelcntrgkh.supabase.co:5432/postgres'
+)
 
-url = urlparse(DATABASE_URL)
+DATABASE_URL = os.getenv(
+    'DATABASE_URL',
+    'postgresql://postgres.pygaenyeyjuelcntrgkh:PcC1zCfNUyznmaUn@aws-0-us-east-1.pooler.supabase.com:5432/postgres?sslmode=require'
+)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'PcC1zCfNUyznmaUn',
-        'HOST': 'db.pygaenyeyjuelcntrgkh.supabase.co',
-        'PORT': '6543',  # or '6543' if required
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
-    }
-}
 
 CSRF_TRUSTED_ORIGINS = [
     'https://chasko-coffee-stop.vercel.app',
-    "https://chasko-coffee-stop-backend-git-master-ayush-dadhaniyas-projects.vercel.app"
+    'https://chasko-coffee-stop-backend-git-master-ayush-dadhaniyas-projects.vercel.app',
 ]
 
 # Password validation
