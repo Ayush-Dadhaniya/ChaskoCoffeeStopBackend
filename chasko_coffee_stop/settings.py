@@ -78,8 +78,19 @@ DATABASE_URL = os.getenv(
     'postgresql://postgres.pygaenyeyjuelcntrgkh:PcC1zCfNUyznmaUn@aws-0-us-east-1.pooler.supabase.com:5432/postgres?sslmode=require'
 )
 DATABASES = {
-    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',  # Use the database name "postgres" as per your pooler URL
+        'USER': 'postgres.pygaenyeyjuelcntrgkh',  # Include the user prefix
+        'PASSWORD': 'PcC1zCfNUyznmaUn',  # Use your actual password
+        'HOST': 'aws-0-us-east-1.pooler.supabase.com',  # Use the Supabase session pooler hostname
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',  # Enforce SSL
+        },
+    }
 }
+
 
 CSRF_TRUSTED_ORIGINS = [
     'https://chasko-coffee-stop.vercel.app',
